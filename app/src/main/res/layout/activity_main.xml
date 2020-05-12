@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/taskInputView"
+        android:layout_width="305dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="402dp"
+        android:layout_marginEnd="-176dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toStartOf="@id/addTacheBtn"
+        android:ems="10"
+        android:hint="Saisir Le Nom de la tache"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/colorAccent"
+        android:textColorLink="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/addTacheBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="402dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="5dp"
+        android:shadowColor="@color/cardview_shadow_end_color"
+        android:text="@string/add_btn"
+        android:textColor="@color/colorPrimary" />
+
+    <ScrollView
+        android:id="@+id/scoll"
+        android:layout_width="396dp"
+
+        android:layout_height="333dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="396dp">
+
+        <LinearLayout
+            android:id="@+id/lineairLayoutView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
