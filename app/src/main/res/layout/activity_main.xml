@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <EditText
@@ -34,7 +34,7 @@
         android:layout_marginTop="402dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="5dp"
-        android:shadowColor="@color/cardview_shadow_end_color"
+        android:shadowColor="#453543"
         android:text="@string/add_btn"
         android:textColor="@color/colorPrimary" />
 

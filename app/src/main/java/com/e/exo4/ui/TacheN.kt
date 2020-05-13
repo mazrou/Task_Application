@@ -1,21 +1,23 @@
 package com.e.exo4.ui
 
 
-class TacheN(tacheName : String, annee : Int, mois: Int, jour: Int) : Comparable<TacheN>{
-    var name = tacheName
-    var annee = annee
-    var mois = mois
-    var  jour = jour
+data class TacheN(
+    val title : String,
+    val annee : Int,
+    val mois: Int,
+    val jour: Int) : Comparable<TacheN>{
+
+
 
     fun dateToString() : String{
         return "$jour-${mois+1}-$annee"
     }
 
     override fun compareTo(other: TacheN): Int {
-        return ("$name-$annee-$mois-$jour").compareTo("${other.name}-${other.annee}-${other.mois}-${other.jour}")
+        return ("$title-$annee-$mois-$jour").compareTo("${other.title}-${other.annee}-${other.mois}-${other.jour}")
     }
 
     override fun hashCode(): Int {
-        return ("$name-$annee-$mois-$jour").hashCode()
+        return ("$title-$annee-$mois-$jour").hashCode()
     }
 }

@@ -4,6 +4,7 @@ package com.e.exo4.ui
 import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.e.exo4.R
+import com.e.exo4.data.network.Api
+import com.e.exo4.data.repository.TaskRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -24,14 +27,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var layoutManager : LinearLayoutManager
     lateinit var List : MutableList<Int>
     var pos: Int = 0
+    private val repository = TaskRepository(Api())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        tachList = repository.getAll()!!
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        List = getToutesTaches(tachList)
+        List = getAujourdhuiTaches(tachList)
         adapter = TachAdapter(this)
         recyclerView.adapter = adapter
 
@@ -92,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         val mois = c.get(Calendar.MONTH)
         val jour = c.get(Calendar.DAY_OF_MONTH)
 
-        addTacheBtn!!.setOnClickListener {
+        addTacheBtn.setOnClickListener {
             val tacheName = taskInputView.text.toString()
             val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, annee, mois, jour ->
                 val tache = TacheN(tacheName, annee, mois, jour)
@@ -115,13 +121,13 @@ class MainActivity : AppCompatActivity() {
     fun changerTaches(position : Int){
         if (position == 0){
             List.clear()
-            List = getToutesTaches(tachList)
+            List = getAujourdhuiTaches(tachList)
             adapter.notifyDataSetChanged()
         }
 
         if (position == 1){
             List.clear()
-            List = getToutesTaches(tachList)
+            List = getMoisTaches(tachList)
             adapter.notifyDataSetChanged()
         }
 
@@ -134,7 +140,21 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    fun getAujourdhuiTaches(mainList : MutableList<TacheN>):MutableList<Int>{
+        var list : MutableList<Int> = ArrayList()
+        for (i in 0 until mainList.size){
+            list.add(i)
+        }
+        return list
+    }
 
+    fun getMoisTaches(mainList : MutableList<TacheN>):MutableList<Int>{
+        var list : MutableList<Int> = ArrayList()
+        for (i in 0 until mainList.size){
+            list.add(i)
+        }
+        return list
+    }
 
     fun getToutesTaches(mainList : MutableList<TacheN>):MutableList<Int>{
         var list : MutableList<Int> = ArrayList()
@@ -161,7 +181,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: TachViewHolder, position: Int) {
-            holder.TacheName.text = activity.tachList[activity.List[position]].name
+            holder.TacheName.text = activity.tachList[activity.List[position]].title
             holder.TacheDate.text = activity.tachList[activity.List[position]].dateToString()
             holder.tacheLayout.setOnClickListener {
                 activity.tachList.removeAt(activity.List[position])
